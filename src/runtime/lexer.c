@@ -25,37 +25,6 @@ TokenType identify_keyword(const char* s) {
 
 
 
-
-// lexer.c
-
-#include "../../include/gramm/token.h"
-#include "../../include/gramm/octog.h"
-#include "../../include/gramm/key.h"
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-// Fonction pour vérifier si un identifiant est un mot-clé G-Lang
-TokenType identify_keyword(const char* s) {
-    if (strcmp(s, K_PKG) == 0) return TK_KW_PKG;
-    if (strcmp(s, K_BAR) == 0) return TK_KW_SBAR;
-    if (strcmp(s, K_DEF) == 0) return TK_KW_DEF;
-    if (strcmp(s, K_VAR) == 0) return TK_KW_VARL;
-    if (strcmp(s, K_OUTL) == 0) return TK_KW_OUTL;
-    if (strcmp(s, K_INPL) == 0) return TK_KW_INPL;
-    if (strcmp(s, K_SYS) == 0) return TK_KW_SYS;
-    if (strcmp(s, K_MUT) == 0) return TK_OP_MUNT;
-    if (strcmp(s, K_TRY) == 0) return TK_KW_TENT;
-    if (strcmp(s, K_XCP) == 0) return TK_KW_EXCP;
-    // ... (Ajouter les 31 mots-clés ici)
-    return TK_ID;
-}
-
-
-
-
-
-
 Token lexer_next_token(OctoReader* r) {
     Token t;
     t.lexeme = NULL; // Sécurité initiale
