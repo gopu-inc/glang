@@ -1,0 +1,9 @@
+varl:str:status:"System Online"
+varl:str:agent:"Mauricio-Pro"
+
+def main() {
+    outl("--- Gopu RAM Check ---")
+    outl(status)
+    outl(agent)
+}
+

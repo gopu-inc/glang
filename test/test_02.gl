@@ -1,0 +1,10 @@
+# Test de l'isolation des blocs
+def secret_data() {
+    outl("ERROR: You should not see this!")
+}
+
+def main() {
+    outl("Executing Main...")
+    outl("Isolation: OK")
+}
+

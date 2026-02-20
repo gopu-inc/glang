@@ -1,0 +1,17 @@
+# Gopu Industrial Workflow
+package {
+    sys/core
+}
+
+varl:str:agent: "Mauricio-Pro"
+
+def main() {
+    outl("--- Gopu Global ---")
+    outl("Agent Name:")
+    outl(agent)
+    outl("Initializing...")
+    
+    # Simulation de succès (le skip_block gère le reste)
+    outl("Process Finished Successfully")
+}
+

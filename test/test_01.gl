@@ -1,0 +1,10 @@
+# Test de la mémoire vive G-Lang
+varl:str:status: "System Online"
+varl:str:version: "v1.0.0"
+
+def main() {
+    outl("--- Gopu RAM Test ---")
+    outl(status)
+    outl(version)
+}
+

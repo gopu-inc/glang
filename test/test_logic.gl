@@ -1,0 +1,9 @@
+def private_func() {
+    outl("CRITICAL ERROR: Logic Leak!")
+}
+
+def main() {
+    outl("--- Gopu Logic Check ---")
+    outl("Accessing main scope: OK")
+}
+

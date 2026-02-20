@@ -1,0 +1,18 @@
+package {
+    sys/json
+    sys/net
+}
+
+# Premier test industriel
+def main() {
+    varl:str: name : "Gopu Agent"
+    outl("Initializing system...")
+    
+    tent {
+        sys(TIME, "now")
+        outl(name)
+    } except {
+        stop("Critical failure")
+    }
+}
+

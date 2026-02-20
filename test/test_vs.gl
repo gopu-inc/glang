@@ -1,0 +1,9 @@
+varl:str:status:"Online"
+varl:str:agent:"Mauricio"
+
+def main() {
+    outl("Check:")
+    outl(status)
+    outl(agent)
+}
+

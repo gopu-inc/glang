@@ -1,0 +1,6 @@
+def main() {
+    outl("Initializing Gopu Industrial...")
+    varl:str:msg:"Process Finished"
+    outl(msg)
+}
+

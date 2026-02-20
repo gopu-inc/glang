@@ -1,0 +1,9 @@
+# Fichier de test G-Lang Industriel
+package {
+    sys/core
+}
+
+# L'interpréteur doit ignorer les commentaires et afficher ceci :
+outl("G-Lang Runtime: Online")
+outl("Gopu.inc - Production Mode Active")
+
