@@ -1,30 +1,31 @@
-#include "gramm/octog.h"
-#include "gramm/token.h"
-#include "gramm/key.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
+#include "gramm/octog.h"
+#include "gramm/token.h"
+#include "gramm/noeud.h"  // Ajout indispensable pour ASTNode
+#include "gramm/synt.h"   // Contient GLParser
 
-
-// Prototype de la fonction engine
-void engine_run(ASTNode* root);
-Token lexer_next_token(OctoReader* r);
+// Déclarations externes pour éviter les warnings
+extern ASTNode* synt_parse_program(GLParser* parser);
+extern void engine_run(ASTNode* root);
+extern Token lexer_next_token(OctoReader* r);
 
 int main(int argc, char** argv) {
+    // Vérification G-Lang : gl run <fichier>
     if (argc < 3) {
-        printf("Usage: gl run <file.gl>\n");
+        printf("Gopu Runtime v1.0\nUsage: gl run <file.gl>\n");
         return 1;
     }
 
-    // 1. Initialisation de l'OctoReader
+    // 1. Initialisation du lecteur Octo
     OctoReader* reader = octo_init_file(argv[2]);
     if (!reader) {
-        printf("Error: Could not open file %s\n", argv[2]);
+        printf("[CRITICAL]: Could not open source file: %s\n", argv[2]);
         return 1;
     }
 
-    // 2. Lexing complet (on stocke tous les tokens d'abord)
+    // 2. Lexing : Transformation du texte en liste de Tokens
     uint32_t capacity = 1024;
     Token* token_list = malloc(sizeof(Token) * capacity);
     uint32_t token_count = 0;
@@ -39,7 +40,7 @@ int main(int argc, char** argv) {
         if (t.type == TK_EOF) break;
     }
 
-    // 3. Initialisation du Parser
+    // 3. Configuration du Parser avec les tokens récoltés
     GLParser parser;
     parser.tokens = token_list;
     parser.current = 0;
@@ -47,17 +48,16 @@ int main(int argc, char** argv) {
     parser.has_error = false;
     parser.panic_mode = false;
 
-    // 4. Parsing
+    // 4. Parsing : Construction de l'Arbre Syntaxique (AST)
     ASTNode* root = synt_parse_program(&parser);
 
-    // 5. Exécution par l'Engine (Seulement si pas d'erreur)
+    // 5. Exécution : L'Engine Gopu fait le travail
     if (root && !parser.has_error) {
         engine_run(root);
     } else {
-        printf("[CRITICAL]: Parser failed or AST is empty.\n");
+        printf("[FAILED]: Compilation error. Execution aborted.\n");
     }
 
-    // Nettoyage (optionnel pour test)
-    // free(token_list); 
+    // On laisse le système nettoyer la mémoire à la fermeture pour les tests
     return 0;
 }
