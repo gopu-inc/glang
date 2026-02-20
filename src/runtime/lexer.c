@@ -18,7 +18,7 @@ TokenType identify_keyword(const char* s) {
     if (strcmp(s, K_RET) == 0)   return TK_KW_RET;
     if (strcmp(s, K_FOR) == 0)   return TK_KW_FOR;
     if (strcmp(s, K_NON) == 0)   return TK_KW_NONLOCAL;
-    if (strcmp(s, K_MUT) == 0)   return TK_OP_MUNT; // Mutation (munt)
+    if (strcmp(s, K_MUT) == 0)   return TK_OP_MUNT; 
 
     // --- MOTS CLÉS D'ACTIONS & I/O ---
     if (strcmp(s, K_WRITE) == 0) return TK_KW_WRITE;
@@ -28,10 +28,8 @@ TokenType identify_keyword(const char* s) {
     if (strcmp(s, K_IN) == 0)    return TK_KW_IN;
     if (strcmp(s, K_STOP) == 0)  return TK_KW_STOP;
     if (strcmp(s, K_EXEC) == 0)  return TK_KW_EXEC;
-    if (strcmp(s, K_WAIT) == 0)  return TK_KW_WAIT;
-    if (strcmp(s, K_LINK) == 0)  return TK_LINK; // Note: Vérifie si TK_LINK est dans ton token.h
-    if (strcmp(s, K_CAST) == 0)  return TK_KW_CAST; // morph
     if (strcmp(s, K_INPL) == 0)  return TK_KW_INPL;
+    if (strcmp(s, K_SYS) == 0)   return TK_KW_SYS;
 
     // --- MOTS CLÉS LOGIQUES & ÉTATS ---
     if (strcmp(s, K_VAR) == 0)   return TK_KW_VARL;
@@ -41,16 +39,19 @@ TokenType identify_keyword(const char* s) {
     if (strcmp(s, K_XCP) == 0)   return TK_KW_EXCP;
     if (strcmp(s, K_TRY) == 0)   return TK_KW_TENT;
     if (strcmp(s, K_SYNC) == 0)  return TK_KW_ATOMIC;
-    if (strcmp(s, K_HIDE) == 0)  return TK_KW_PRIV;   // priv
-    if (strcmp(s, K_OPEN) == 0)  return TK_KW_PUBL;   // publ
-    if (strcmp(s, K_VOID) == 0)  return TK_KW_NULLA;  // nulla
-    if (strcmp(s, K_SYS) == 0)   return TK_KW_SYS;
 
-    return TK_ID; // Si ce n'est pas un mot-clé, c'est un identifiant (nom de variable, etc.)
+    // --- GESTION DES MOTS MANQUANTS (Temporaire) ---
+    // Ces mots-clés ne sont pas encore dans ton enum TokenType (token.h)
+    // On les fait tomber dans TK_ID pour que ça compile
+    if (strcmp(s, K_WAIT) == 0)  return TK_ID; 
+    if (strcmp(s, K_LINK) == 0)  return TK_ID;
+    if (strcmp(s, K_CAST) == 0)  return TK_ID; // morph
+    if (strcmp(s, K_HIDE) == 0)  return TK_ID; // priv
+    if (strcmp(s, K_OPEN) == 0)  return TK_ID; // publ
+    if (strcmp(s, K_VOID) == 0)  return TK_ID; // nulla
+
+    return TK_ID;
 }
-
-
-
 
 Token lexer_next_token(OctoReader* r) {
     Token t;
