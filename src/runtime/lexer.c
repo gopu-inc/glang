@@ -9,19 +9,46 @@
 
 // Fonction pour vérifier si un identifiant est un mot-clé G-Lang
 TokenType identify_keyword(const char* s) {
-    if (strcmp(s, K_PKG) == 0) return TK_KW_PKG;
-    if (strcmp(s, K_BAR) == 0) return TK_KW_SBAR;
-    if (strcmp(s, K_DEF) == 0) return TK_KW_DEF;
-    if (strcmp(s, K_VAR) == 0) return TK_KW_VARL;
-    if (strcmp(s, K_OUTL) == 0) return TK_KW_OUTL;
-    if (strcmp(s, K_INPL) == 0) return TK_KW_INPL;
-    if (strcmp(s, K_SYS) == 0) return TK_KW_SYS;
-    if (strcmp(s, K_MUT) == 0) return TK_OP_MUNT;
-    if (strcmp(s, K_TRY) == 0) return TK_KW_TENT;
-    if (strcmp(s, K_XCP) == 0) return TK_KW_EXCP;
-    // ... (Ajouter les 31 mots-clés ici)
-    return TK_ID;
+    // --- MOTS CLÉS DE STRUCTURE ---
+    if (strcmp(s, K_PKG) == 0)   return TK_KW_PKG;
+    if (strcmp(s, K_BAR) == 0)   return TK_KW_SBAR;
+    if (strcmp(s, K_DEF) == 0)   return TK_KW_DEF;
+    if (strcmp(s, K_CLS) == 0)   return TK_KW_CLS;
+    if (strcmp(s, K_EXT) == 0)   return TK_KW_EXT;
+    if (strcmp(s, K_RET) == 0)   return TK_KW_RET;
+    if (strcmp(s, K_FOR) == 0)   return TK_KW_FOR;
+    if (strcmp(s, K_NON) == 0)   return TK_KW_NONLOCAL;
+    if (strcmp(s, K_MUT) == 0)   return TK_OP_MUNT; // Mutation (munt)
+
+    // --- MOTS CLÉS D'ACTIONS & I/O ---
+    if (strcmp(s, K_WRITE) == 0) return TK_KW_WRITE;
+    if (strcmp(s, K_READ) == 0)  return TK_KW_READ;
+    if (strcmp(s, K_OUTL) == 0)  return TK_KW_OUTL;
+    if (strcmp(s, K_LOGL) == 0)  return TK_KW_LOGL;
+    if (strcmp(s, K_IN) == 0)    return TK_KW_IN;
+    if (strcmp(s, K_STOP) == 0)  return TK_KW_STOP;
+    if (strcmp(s, K_EXEC) == 0)  return TK_KW_EXEC;
+    if (strcmp(s, K_WAIT) == 0)  return TK_KW_WAIT;
+    if (strcmp(s, K_LINK) == 0)  return TK_LINK; // Note: Vérifie si TK_LINK est dans ton token.h
+    if (strcmp(s, K_CAST) == 0)  return TK_KW_CAST; // morph
+    if (strcmp(s, K_INPL) == 0)  return TK_KW_INPL;
+
+    // --- MOTS CLÉS LOGIQUES & ÉTATS ---
+    if (strcmp(s, K_VAR) == 0)   return TK_KW_VARL;
+    if (strcmp(s, K_IF) == 0)    return TK_KW_IF;
+    if (strcmp(s, K_ELSE) == 0)  return TK_KW_ELSE;
+    if (strcmp(s, K_WHILE) == 0) return TK_KW_WHILE;
+    if (strcmp(s, K_XCP) == 0)   return TK_KW_EXCP;
+    if (strcmp(s, K_TRY) == 0)   return TK_KW_TENT;
+    if (strcmp(s, K_SYNC) == 0)  return TK_KW_ATOMIC;
+    if (strcmp(s, K_HIDE) == 0)  return TK_KW_PRIV;   // priv
+    if (strcmp(s, K_OPEN) == 0)  return TK_KW_PUBL;   // publ
+    if (strcmp(s, K_VOID) == 0)  return TK_KW_NULLA;  // nulla
+    if (strcmp(s, K_SYS) == 0)   return TK_KW_SYS;
+
+    return TK_ID; // Si ce n'est pas un mot-clé, c'est un identifiant (nom de variable, etc.)
 }
+
 
 
 
