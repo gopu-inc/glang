@@ -39,6 +39,11 @@ void execute_var_decl(ASTNode* node) {
 
 void gopu_execute_node(ASTNode* node) {
     if (!node) return;
+    // Sécurité critique : si on a un compte d'enfants mais pas de tableau
+    if (node->child_count > 0 && node->children == NULL) {
+        return; 
+    }
+   
 
     switch (node->type) {
         case NODE_ROOT:
